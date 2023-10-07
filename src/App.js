@@ -1,23 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import Content from './content.js/content';
+import { useState, useCallback } from "react"
 
 function App() {
+  const [count, setCount] = useState(0);
+  const [show, setShow] = useState(false);
+
+  const handleCount = useCallback(() => {
+    setCount((prevState) => prevState + 1);
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>{count}</h2>
+      <br />
+      <button onClick={() => setShow(!show)}>Toggle Content</button>
+      {show && <Content handleCount={handleCount} />}
     </div>
   );
 }
